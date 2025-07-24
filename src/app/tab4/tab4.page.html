@@ -1,0 +1,102 @@
+<ion-header translucent="true">
+  <ion-toolbar class="header-bar">
+    <ion-title>📚 Daftar Buku</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="content-background ion-padding">
+
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterBooks()"
+    debounce="300"
+    placeholder="Cari buku favorit Anda..."
+    class="custom-searchbar">
+  </ion-searchbar>
+
+  <h2 class="section-title">Perpustakaan ITBI</h2>
+
+  <div class="book-grid">
+    <div class="book-card"
+         *ngFor="let buku of filteredBooks"
+         tabindex="0"
+         role="button"
+         [attr.aria-label]="'Buku ' + buku.judul"
+         (click)="selectBook(buku)">
+      <div class="book-image-container">
+        <img [src]="buku.foto ? buku.foto : 'assets/img/default-book.png'" alt="Cover {{buku.judul}}" />
+        <div class="book-overlay">
+          <ion-icon name="eye-outline" class="view-icon"></ion-icon>
+        </div>
+      </div>
+      <div class="book-info">
+        <h3>{{ buku.judul }}</h3>
+        <p>{{ buku.penulis }}</p>
+        <div class="book-rating">
+          <ion-icon name="star" class="star-icon"></ion-icon>
+          <ion-icon name="star" class="star-icon"></ion-icon>
+          <ion-icon name="star" class="star-icon"></ion-icon>
+          <ion-icon name="star" class="star-icon"></ion-icon>
+          <ion-icon name="star-outline" class="star-icon"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail buku dengan desain yang lebih elegan -->
+  <ion-card *ngIf="selectedBook" class="detail-card ion-margin-top">
+    <div class="detail-header">
+      <div class="detail-image-container">
+        <ion-img [src]="selectedBook.foto ? selectedBook.foto : 'assets/img/default-book.png'"></ion-img>
+      </div>
+      <div class="detail-info">
+        <ion-card-header>
+          <ion-card-title class="detail-title">{{ selectedBook.judul }}</ion-card-title>
+          <ion-card-subtitle class="detail-author">{{ selectedBook.penulis }}</ion-card-subtitle>
+        </ion-card-header>
+        <div class="detail-rating">
+          <ion-icon name="star" class="star-icon active"></ion-icon>
+          <ion-icon name="star" class="star-icon active"></ion-icon>
+          <ion-icon name="star" class="star-icon active"></ion-icon>
+          <ion-icon name="star" class="star-icon active"></ion-icon>
+          <ion-icon name="star-outline" class="star-icon"></ion-icon>
+          <span class="rating-text">4.2/5</span>
+        </div>
+      </div>
+    </div>
+    
+    <ion-card-content class="detail-content">
+      <div class="detail-description">
+        <h4>📖 Deskripsi</h4>
+        <p>Buku yang menawan dengan cerita yang memikat hati. Sebuah karya masterpiece yang akan membawa Anda dalam petualangan tak terlupakan melalui setiap halaman yang penuh makna.</p>
+      </div>
+      
+      <div class="detail-specs">
+        <div class="spec-item">
+          <ion-icon name="calendar-outline" class="spec-icon"></ion-icon>
+          <span>2024</span>
+        </div>
+        <div class="spec-item">
+          <ion-icon name="library-outline" class="spec-icon"></ion-icon>
+          <span>Penerbit Impian</span>
+        </div>
+        <div class="spec-item">
+          <ion-icon name="document-text-outline" class="spec-icon"></ion-icon>
+          <span>320 halaman</span>
+        </div>
+      </div>
+    </ion-card-content>
+    
+    <div class="detail-buttons">
+      <ion-button expand="block" color="primary" class="action-button">
+        <ion-icon name="heart-outline" slot="start"></ion-icon>
+        Tambah ke Favorit
+      </ion-button>
+      <ion-button expand="block" fill="outline" color="medium" class="close-button" (click)="closeDetail()">
+        <ion-icon name="close-outline" slot="start"></ion-icon>
+        Tutup Detail
+      </ion-button>
+    </div>
+  </ion-card>
+
+</ion-content>

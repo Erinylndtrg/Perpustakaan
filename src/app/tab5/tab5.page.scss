@@ -1,0 +1,145 @@
+/* 🌈 Latar belakang gradien (default terang) */
+.content-background {
+  --background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: 0;
+}
+
+/* 🌙 Override untuk mode gelap */
+body.dark .content-background {
+  --background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+}
+
+/* 📦 Container utama */
+.about-wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🖼️ Logo */
+.app-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🏷️ Judul */
+.app-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2d3436;
+  margin-bottom: 12px;
+}
+body.dark .app-name {
+  color: #ffffff;
+}
+
+/* ✏️ Deskripsi */
+.description {
+  font-size: 1rem;
+  color: #636e72;
+  max-width: 600px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+body.dark .description {
+  color: #dfe6e9;
+}
+
+/* 📦 Card Styling */
+ion-card {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  ion-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2d3436;
+  }
+}
+body.dark ion-card-title {
+  color: #ffffff;
+}
+
+/* 🗨️ Textarea */
+ion-textarea {
+  background: #f1f2f6;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #2d3436;
+}
+body.dark ion-textarea {
+  background: #2d3436;
+  color: #dfe6e9;
+}
+
+/* 🔘 Tombol */
+ion-button {
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+/* 🌘 Toggle dark mode */
+ion-toggle {
+  --handle-background: #fff;
+  --background-checked: #00b894;
+}
+
+/* ℹ️ Info List */
+ion-list ion-item {
+  --background: transparent;
+  color: #2d3436;
+  font-weight: 600;
+
+  ion-icon {
+    color: #fd79a8;
+    margin-right: 12px;
+  }
+
+  ion-note {
+    color: #636e72;
+    font-weight: 500;
+  }
+}
+body.dark ion-list ion-item {
+  color: #ffffff;
+
+  ion-note {
+    color: #dfe6e9;
+  }
+
+  ion-icon {
+    color: #81ecec;
+  }
+}
+
+/* 📌 Footer */
+ion-text {
+  margin-top: 32px;
+  font-size: 0.85rem;
+  color: #b2bec3;
+}
+body.dark ion-text {
+  color: #dfe6e9;
+}

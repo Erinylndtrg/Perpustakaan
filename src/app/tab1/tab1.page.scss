@@ -1,0 +1,129 @@
+/* Background untuk konten */
+.dashboard-content {
+  --background: linear-gradient(135deg, #fbc2eb 0%, #f9a7ff 100%);
+}
+
+/* Header pelangi beranimasi */
+.animated-rainbow-header {
+  --background: transparent;
+  background: linear-gradient(270deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1, #5f27cd, #ff6b6b);
+  background-size: 600% 600%;
+  animation: gradientMove 8s ease infinite;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Teks judul yang glowing dan mengkilap */
+.glow-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  animation: glow 2s ease-in-out infinite alternate, shimmer 5s linear infinite;
+  background: linear-gradient(90deg, #fff 0%, #ffd1dc 50%, #ffffff 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff6b81, 0 0 30px #ff6b81;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4757, 0 0 40px #ff4757;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -100% center; }
+  100% { background-position: 100% center; }
+}
+
+/* Hero Section */
+.hero-banner {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+
+    .highlight {
+      color: #ff5ca7;
+      font-weight: bold;
+    }
+  }
+
+  p {
+    color: #666;
+  }
+}
+
+/* Gambar banner */
+.banner-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+/* Menu utama */
+.menu-section {
+  text-align: center;
+}
+
+/* Box menu tombol */
+.menu-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px 10px;
+  margin: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+
+  ion-icon {
+    color: #ff6b81;
+    font-size: 28px;
+  }
+
+  p {
+    margin-top: 10px;
+    font-weight: 500;
+    color: #444;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Efek animasi bounce */
+.bounce {
+  animation: bounceIn 1s;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}

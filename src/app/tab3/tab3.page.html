@@ -1,0 +1,684 @@
+<ion-header translucent="true">
+  <ion-toolbar class="rainbow-header" style="--background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #f093fb, #ff6b6b) !important;">
+    <ion-title class="animated-title" style="color: white !important;">
+      <div class="title-content">
+        <ion-icon name="library-outline" class="floating-icon"></ion-icon>
+        📚 Daftar Peminjaman
+        <div class="sparkles">✨</div>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="pink-gradient-bg">
+  
+  <!-- Hero Section dengan Animasi -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <ion-icon name="book-outline" class="bounce-icon"></ion-icon>
+      </div>
+      <h1 class="hero-title">Data Peminjaman Buku</h1>
+      <p class="hero-subtitle">Kelola koleksi buku pinjaman Anda dengan mudah 📖</p>
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">{{ peminjamanList.length }}</span>
+          <span class="stat-label">Total Pinjaman</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daftar Peminjaman dengan Animasi -->
+  <div class="cards-container">
+    <ion-card class="modern-card slide-in" *ngFor="let item of peminjamanList; let i = index" [style.animation-delay]="i * 0.1 + 's'">
+      <div class="card-header">
+        <div class="book-avatar">
+          <ion-icon name="book" class="book-icon"></ion-icon>
+        </div>
+        <div class="card-status">
+          <span class="status-badge active">Dipinjam</span>
+        </div>
+      </div>
+      
+      <ion-card-content class="modern-card-content">
+        
+        <!-- Informasi Peminjam -->
+        <div class="section-title">
+          <ion-icon name="person-circle" class="section-icon"></ion-icon>
+          <span>Informasi Peminjam</span>
+        </div>
+        
+        <div class="info-grid">
+          <div class="info-item">
+            <ion-icon name="person-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <span class="info-label">Nama</span>
+              <span class="info-value">{{ item.nama }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <ion-icon name="mail-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <span class="info-label">Email</span>
+              <span class="info-value">{{ item.email }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <ion-icon name="call-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <span class="info-label">Telepon</span>
+              <span class="info-value">{{ item.telepon }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informasi Buku -->
+        <div class="section-title">
+          <ion-icon name="library" class="section-icon"></ion-icon>
+          <span>Detail Buku</span>
+        </div>
+        
+        <div class="book-details">
+          <div class="book-info">
+            <h3 class="book-title">{{ item.judul }}</h3>
+            <span class="book-category">{{ item.kategori }}</span>
+          </div>
+          
+          <div *ngIf="item.gambar" class="book-image">
+            <img [src]="item.gambar" alt="Cover Buku" class="cover-image"/>
+          </div>
+        </div>
+
+        <!-- Tanggal Peminjaman -->
+        <div class="date-section">
+          <div class="date-item">
+            <ion-icon name="calendar-outline" class="date-icon"></ion-icon>
+            <div class="date-content">
+              <span class="date-label">Tanggal Pinjam</span>
+              <span class="date-value">{{ item.tanggal_pinjam | date:'dd MMM yyyy' }}</span>
+            </div>
+          </div>
+          
+          <div class="date-item">
+            <ion-icon name="calendar-clear-outline" class="date-icon return-date"></ion-icon>
+            <div class="date-content">
+              <span class="date-label">Tanggal Kembali</span>
+              <span class="date-value return-date">{{ item.tanggal_kembali | date:'dd MMM yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="action-buttons">
+          <ion-button expand="block" color="danger" fill="solid" shape="round" class="delete-btn" (click)="hapusData(item.id)">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+            Hapus Peminjaman
+          </ion-button>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="peminjamanList.length === 0" class="empty-state">
+    <div class="empty-icon">
+      <ion-icon name="library-outline" class="empty-main-icon"></ion-icon>
+      <div class="empty-decoration">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-icon name="book-outline"></ion-icon>
+      </div>
+    </div>
+    <h2 class="empty-title">Belum Ada Peminjaman</h2>
+    <p class="empty-subtitle">Mulai pinjam buku favoritmu sekarang!</p>
+    <ion-button fill="solid" color="primary" shape="round" class="empty-action-btn">
+      <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+      Pinjam Buku
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<style>
+  /* Rainbow Header Animation */
+  .rainbow-header {
+    --background: linear-gradient(
+      45deg,
+      #ff6b6b,
+      #4ecdc4,
+      #45b7d1,
+      #96ceb4,
+      #feca57,
+      #ff9ff3,
+      #f093fb,
+      #ff6b6b
+    ) !important;
+    background: linear-gradient(
+      45deg,
+      #ff6b6b,
+      #4ecdc4,
+      #45b7d1,
+      #96ceb4,
+      #feca57,
+      #ff9ff3,
+      #f093fb,
+      #ff6b6b
+    ) !important;
+    background-size: 400% 400% !important;
+    animation: rainbowFlow 4s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  .rainbow-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2.5s infinite;
+  }
+
+  @keyframes rainbowFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* Animated Title */
+  .animated-title {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: white !important;
+    --color: white !important;
+  }
+
+  .rainbow-header ion-title {
+    color: white !important;
+    --color: white !important;
+  }
+
+  .title-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .floating-icon {
+    animation: float 2s ease-in-out infinite;
+    font-size: 1.2em;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .sparkles {
+    position: absolute;
+    right: -30px;
+    animation: sparkle 1.5s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Pink Gradient Background */
+  .pink-gradient-bg {
+    --background: linear-gradient(135deg, #ff9ff3 0%, #feca57 20%, #ff9ff3 40%, #f093fb 60%, #ff9ff3 80%, #feca57 100%);
+    background-size: 400% 400%;
+    animation: backgroundFlow 8s ease-in-out infinite;
+  }
+
+  @keyframes backgroundFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 40px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(255, 159, 243, 0.3);
+  }
+
+  .hero-content {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .hero-icon {
+    margin-bottom: 20px;
+  }
+
+  .bounce-icon {
+    font-size: 4rem;
+    color: #fff;
+    animation: bounce 2s infinite;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 25px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  .stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .stat-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Cards Container */
+  .cards-container {
+    padding: 0 16px 100px 16px;
+  }
+
+  /* Modern Card Styling */
+  .modern-card {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(255, 159, 243, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 159, 243, 0.3);
+  }
+
+  .slide-in {
+    animation: slideIn 0.6s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+  }
+
+  .book-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+  }
+
+  .book-icon {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge.active {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: white;
+    box-shadow: 0 4px 12px rgba(76, 205, 196, 0.3);
+  }
+
+  .modern-card-content {
+    padding: 20px;
+  }
+
+  /* Section Titles */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255, 159, 243, 0.3);
+  }
+
+  .section-icon {
+    font-size: 1.2rem;
+    color: #ff6b6b;
+  }
+
+  .section-title span {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.1rem;
+  }
+
+  /* Info Grid */
+  .info-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 159, 243, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .info-item:hover {
+    background: rgba(255, 159, 243, 0.2);
+    transform: translateX(5px);
+  }
+
+  .info-icon {
+    font-size: 1.2rem;
+    color: #ff6b6b;
+    min-width: 20px;
+  }
+
+  .info-content {
+    flex: 1;
+  }
+
+  .info-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .info-value {
+    display: block;
+    font-weight: 600;
+    color: #333;
+  }
+
+  /* Book Details */
+  .book-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255, 159, 243, 0.1), rgba(254, 202, 87, 0.1));
+    border-radius: 16px;
+    border: 1px solid rgba(255, 159, 243, 0.2);
+  }
+
+  .book-info {
+    flex: 1;
+  }
+
+  .book-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px 0;
+  }
+
+  .book-category {
+    padding: 4px 12px;
+    background: linear-gradient(45deg, #feca57, #ff9ff3);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .book-image {
+    margin-left: 16px;
+  }
+
+  .cover-image {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* Date Section */
+  .date-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .date-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 159, 243, 0.2);
+  }
+
+  .date-icon {
+    font-size: 1.1rem;
+    color: #4ecdc4;
+  }
+
+  .date-icon.return-date {
+    color: #ff6b6b;
+  }
+
+  .date-content {
+    flex: 1;
+  }
+
+  .date-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .date-value {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .date-value.return-date {
+    color: #ff6b6b;
+  }
+
+  /* Action Buttons */
+  .action-buttons {
+    margin-top: 20px;
+  }
+
+  .delete-btn {
+    --background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    --color: white;
+    font-weight: 600;
+    height: 48px;
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 20px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .empty-icon {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .empty-main-icon {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.8);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .empty-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 4s linear infinite;
+  }
+
+  .empty-decoration ion-icon {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 8px;
+  }
+
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .empty-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 12px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .empty-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 32px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  .empty-action-btn {
+    --background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    --color: white;
+    font-weight: 600;
+    height: 48px;
+    box-shadow: 0 4px 16px rgba(76, 205, 196, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+    
+    .book-details {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .book-image {
+      margin-left: 0;
+      margin-top: 12px;
+    }
+    
+    .date-section {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

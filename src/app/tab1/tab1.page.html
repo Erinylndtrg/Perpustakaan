@@ -1,0 +1,55 @@
+<ion-header translucent="true">
+  <ion-toolbar class="animated-rainbow-header">
+    <ion-title class="glow-text">📚 PERPUSTAKAAN ITBI</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="dashboard-content ion-padding">
+
+  <!-- Hero Section -->
+  <div class="hero-banner">
+    <h2>Hi 👋</h2>
+    <h3>Selamat Datang di <span class="highlight">PERPUSTAKAAN ITBI</span></h3>
+    <p>Eksplor koleksi buku digital favoritmu!</p>
+  </div>
+
+  <!-- Banner Gambar -->
+  <ion-card class="banner-card">
+    <ion-img src="assets/bener.jfif" alt="Banner Perpustakaan ITBI"></ion-img>
+  </ion-card>
+
+  <!-- Menu Utama -->
+  <div class="menu-section">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <div class="menu-box bounce" (click)="goToPeminjaman()">
+            <ion-icon name="document-text-outline" size="large"></ion-icon>
+            <p>Peminjaman Buku</p>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="menu-box bounce" (click)="goToDataPeminjaman()">
+            <ion-icon name="albums-outline" size="large"></ion-icon>
+            <p>Data Peminjaman</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="menu-box bounce" (click)="goToDaftarBuku()">
+            <ion-icon name="library-outline" size="large"></ion-icon>
+            <p>Daftar Buku</p>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="menu-box bounce" (click)="goToTentangAplikasi()">
+            <ion-icon name="information-circle-outline" size="large"></ion-icon>
+            <p>Tentang Aplikasi</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

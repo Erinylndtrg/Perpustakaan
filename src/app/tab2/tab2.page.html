@@ -1,0 +1,130 @@
+<ion-header translucent="true">
+  <ion-toolbar class="header-bar">
+    <ion-title>📚 Peminjaman Buku</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding content-background">
+
+  <!-- Hero -->
+  <div class="hero-banner">
+    <h2>Selamat Datang di Perpus Digital</h2>
+    <p>Isi data berikut untuk melakukan peminjaman buku 📖</p>
+  </div>
+
+  <!-- Form Peminjaman -->
+  <ion-card class="form-card">
+    <ion-card-content>
+      <ion-list lines="none">
+
+        <!-- Nama -->
+        <ion-item class="colorful-item">
+          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+          <ion-input placeholder="Nama Peminjam" [(ngModel)]="nama"></ion-input>
+        </ion-item>
+
+        <!-- Email -->
+        <ion-item class="colorful-item">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-input type="email" placeholder="Email Peminjam" [(ngModel)]="email"></ion-input>
+        </ion-item>
+
+        <!-- Telepon -->
+        <ion-item class="colorful-item">
+          <ion-icon slot="start" name="call-outline"></ion-icon>
+          <ion-input type="tel" placeholder="Nomor Telepon" [(ngModel)]="telepon"></ion-input>
+        </ion-item>
+
+        <!-- Kategori -->
+        <div class="label-title ion-padding-top">Kategori Buku</div>
+        <ion-row>
+          <ion-chip *ngFor="let kat of kategoriList"
+                    [color]="kategori === kat ? 'tertiary' : 'medium'"
+                    (click)="kategori = kat">
+            <ion-label>{{ kat }}</ion-label>
+          </ion-chip>
+        </ion-row>
+
+        <!-- Judul Buku -->
+        <ion-item class="colorful-item">
+          <ion-icon slot="start" name="book-outline"></ion-icon>
+          <ion-input placeholder="Judul Buku" [(ngModel)]="judul"></ion-input>
+        </ion-item>
+
+        <!-- Tanggal Pinjam -->
+        <ion-item button detail lines="inset" class="colorful-item" (click)="bukaDatePicker('pinjam')">
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>
+            {{ tanggalPinjam ? (tanggalPinjam | date:'dd MMM yyyy') : 'Pilih Tanggal Peminjaman' }}
+          </ion-label>
+        </ion-item>
+
+        <!-- Tanggal Kembali -->
+        <ion-item button detail lines="inset" class="colorful-item" (click)="bukaDatePicker('kembali')">
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>
+            {{ tanggalKembali ? (tanggalKembali | date:'dd MMM yyyy') : 'Pilih Tanggal Pengembalian' }}
+          </ion-label>
+        </ion-item>
+
+        <!-- Upload Gambar -->
+        <ion-item class="colorful-item">
+          <ion-icon slot="start" name="image-outline"></ion-icon>
+          <input type="file" (change)="uploadGambar($event)" />
+        </ion-item>
+
+        <!-- Preview Gambar -->
+        <div *ngIf="gambar" class="image-preview ion-padding-top">
+          <img [src]="gambar" alt="preview" />
+        </div>
+
+      </ion-list>
+
+      <!-- Tombol Simpan -->
+      <ion-button
+        class="save-button"
+        expand="block"
+        shape="round"
+        size="large"
+        (click)="simpanData()">
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+        Simpan Peminjaman
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Spacer agar tidak ketutup FAB -->
+  <div class="bottom-spacer"></div>
+
+  <!-- FAB Tombol Kembali ke Dashboard -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button size="small" color="medium" (click)="kembaliKeDashboard()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Modal Date Picker -->
+  <ion-modal [isOpen]="showDateModal" (didDismiss)="showDateModal = false">
+    <ng-template>
+      <ion-header translucent="true">
+        <ion-toolbar color="primary">
+          <ion-title>Pilih Tanggal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="showDateModal = false">Tutup</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-datetime
+          [value]="activeDateType === 'pinjam' ? tanggalPinjam : tanggalKembali"
+          presentation="date"
+          prefer-wheel="true"
+          (ionChange)="tanggalDipilih($event)">
+        </ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

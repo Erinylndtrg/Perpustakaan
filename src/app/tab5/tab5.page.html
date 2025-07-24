@@ -1,0 +1,751 @@
+<ion-header translucent>
+  <ion-toolbar class="gradient-toolbar">
+    <ion-title class="toolbar-title">
+      <ion-icon name="information-circle" class="title-icon"></ion-icon>
+      Tentang Aplikasi
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="modern-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="app-logo-container">
+          <div class="logo-wrapper">
+            <ion-icon name="library" class="main-logo"></ion-icon>
+            <div class="logo-glow"></div>
+          </div>
+        </div>
+        <h1 class="app-title">Perpustakaan ITBI</h1>
+        <p class="app-subtitle">Solusi digital untuk mengelola perpustakaan modern</p>
+        <div class="feature-badges">
+          <ion-chip color="light" class="feature-chip">
+            <ion-icon name="book-outline"></ion-icon>
+            <ion-label>Manajemen Buku</ion-label>
+          </ion-chip>
+          <ion-chip color="light" class="feature-chip">
+            <ion-icon name="search-outline"></ion-icon>
+            <ion-label>Pencarian Cepat</ion-label>
+          </ion-chip>
+          <ion-chip color="light" class="feature-chip">
+            <ion-icon name="time-outline"></ion-icon>
+            <ion-label>Riwayat Peminjaman</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Information Cards -->
+  <div class="cards-container">
+    <!-- App Info Card -->
+    <ion-card class="modern-card info-card">
+      <div class="card-header">
+        <div class="card-icon-wrapper primary">
+          <ion-icon name="settings-outline"></ion-icon>
+        </div>
+        <h2>Informasi Aplikasi</h2>
+      </div>
+      <ion-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <ion-icon name="code-working-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <p class="info-label">Versi Aplikasi</p>
+              <p class="info-value">{{ appVersion || 'v1.0.0' }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <ion-icon name="people-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <p class="info-label">Pengembang</p>
+              <p class="info-value">{{ developer || 'Tim IT ITBI' }}</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <ion-icon name="mail-outline" class="info-icon"></ion-icon>
+            <div class="info-content">
+              <p class="info-label">Kontak Support</p>
+              <p class="info-value">{{ contactEmail || 'support@itbi.ac.id' }}</p>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Settings Card -->
+    <ion-card class="modern-card settings-card">
+      <div class="card-header">
+        <div class="card-icon-wrapper secondary">
+          <ion-icon name="color-palette-outline"></ion-icon>
+        </div>
+        <h2>Preferensi Tampilan</h2>
+      </div>
+      <ion-card-content>
+        <div class="settings-item">
+          <div class="setting-info">
+            <ion-icon name="moon-outline" class="setting-icon"></ion-icon>
+            <div>
+              <p class="setting-title">Mode Gelap</p>
+              <p class="setting-desc">Aktifkan untuk tampilan yang lebih nyaman di mata</p>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="darkMode" (ionChange)="toggleTheme()" class="modern-toggle"></ion-toggle>
+        </div>
+        
+        <div class="settings-item">
+          <div class="setting-info">
+            <ion-icon name="notifications-outline" class="setting-icon"></ion-icon>
+            <div>
+              <p class="setting-title">Notifikasi</p>
+              <p class="setting-desc">Terima pemberitahuan peminjaman dan pengembalian</p>
+            </div>
+          </div>
+          <ion-toggle checked="true" class="modern-toggle"></ion-toggle>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Quick Actions -->
+    <ion-card class="modern-card actions-card">
+      <div class="card-header">
+        <div class="card-icon-wrapper tertiary">
+          <ion-icon name="rocket-outline"></ion-icon>
+        </div>
+        <h2>Aksi Cepat</h2>
+      </div>
+      <ion-card-content>
+        <div class="actions-grid">
+          <ion-button fill="clear" class="action-button" (click)="bukaPanduan()">
+            <div class="action-content">
+              <ion-icon name="help-circle-outline"></ion-icon>
+              <span>Panduan</span>
+            </div>
+          </ion-button>
+          
+          <ion-button fill="clear" class="action-button">
+            <div class="action-content">
+              <ion-icon name="star-outline"></ion-icon>
+              <span>Rating</span>
+            </div>
+          </ion-button>
+          
+          <ion-button fill="clear" class="action-button">
+            <div class="action-content">
+              <ion-icon name="share-outline"></ion-icon>
+              <span>Bagikan</span>
+            </div>
+          </ion-button>
+          
+          <ion-button fill="clear" class="action-button">
+            <div class="action-content">
+              <ion-icon name="bug-outline"></ion-icon>
+              <span>Laporkan</span>
+            </div>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Feedback Card -->
+    <ion-card class="modern-card feedback-card">
+      <div class="card-header">
+        <div class="card-icon-wrapper success">
+          <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+        </div>
+        <h2>Kritik & Saran</h2>
+      </div>
+      <ion-card-content>
+        <p class="feedback-desc">Bantu kami meningkatkan aplikasi dengan memberikan masukan Anda</p>
+        <ion-textarea
+          [(ngModel)]="feedbackText"
+          placeholder="Tulis kritik atau saran Anda di sini..."
+          rows="4"
+          class="modern-textarea"
+        ></ion-textarea>
+        <ion-button expand="block" class="modern-button" (click)="kirimFeedback()">
+          <ion-icon name="send-outline" slot="start"></ion-icon>
+          Kirim Feedback
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Logout Card -->
+    <ion-card class="modern-card logout-card">
+      <ion-card-content>
+        <ion-button expand="block" color="danger" class="logout-button" (click)="logout()">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Keluar dari Aplikasi
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-section">
+    <div class="footer-content">
+      <ion-icon name="heart" class="footer-icon"></ion-icon>
+      <p class="footer-text">Dibuat dengan ❤️ untuk ITBI</p>
+      <p class="footer-copyright">&copy; 2025 Perpustakaan ITBI. All rights reserved.</p>
+    </div>
+  </div>
+</ion-content>
+
+<style>
+  /* Global Styles */
+  .modern-content {
+    --background: linear-gradient(135deg, #ff6b9d 0%, #ff8ba7 50%, #ffa8c1 100%);
+    background: var(--background);
+  }
+
+  .gradient-toolbar {
+    --background: linear-gradient(90deg, #ff6b9d 0%, #ff8ba7 14%, #ffa8c1 28%, #b6e5d8 42%, #a8e6cf 56%, #88e5a3 70%, #7fcdcd 84%, #6c7ce0 100%);
+    --color: white;
+    position: relative;
+    overflow: hidden;
+    animation: rainbowShift 3s ease-in-out infinite;
+  }
+
+  .gradient-toolbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+  }
+
+  @keyframes rainbowShift {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    25% { filter: hue-rotate(90deg) brightness(1.1); }
+    50% { filter: hue-rotate(180deg) brightness(1.2); }
+    75% { filter: hue-rotate(270deg) brightness(1.1); }
+    100% { filter: hue-rotate(360deg) brightness(1); }
+  }
+
+  .toolbar-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .title-icon {
+    font-size: 20px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .hero-background {
+    position: relative;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.9) 0%, rgba(255, 139, 167, 0.9) 50%, rgba(255, 168, 193, 0.9) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .floating-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    animation: float 6s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+  }
+
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .shape-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+  }
+
+  .shape-3 {
+    width: 40px;
+    height: 40px;
+    top: 80%;
+    left: 70%;
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+  }
+
+  .app-logo-container {
+    margin-bottom: 20px;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .main-logo {
+    font-size: 80px;
+    color: white;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes glow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .app-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .app-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0 0 20px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  .feature-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .feature-chip {
+    --background: rgba(255, 255, 255, 0.2);
+    --color: white;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: slideUp 0.6s ease-out forwards;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .feature-chip:nth-child(1) { animation-delay: 0.1s; }
+  .feature-chip:nth-child(2) { animation-delay: 0.2s; }
+  .feature-chip:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Cards Container */
+  .cards-container {
+    padding: 0 16px 20px;
+  }
+
+  .modern-card {
+    margin-bottom: 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: cardSlideIn 0.6s ease-out forwards;
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  .modern-card:nth-child(1) { animation-delay: 0.1s; }
+  .modern-card:nth-child(2) { animation-delay: 0.2s; }
+  .modern-card:nth-child(3) { animation-delay: 0.3s; }
+  .modern-card:nth-child(4) { animation-delay: 0.4s; }
+  .modern-card:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes cardSlideIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .modern-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 20px 20px 0;
+  }
+
+  .card-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ion-color-dark);
+  }
+
+  .card-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+  }
+
+  .card-icon-wrapper.primary {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8ba7 100%);
+  }
+
+  .card-icon-wrapper.secondary {
+    background: linear-gradient(135deg, #ffa8c1 0%, #b6e5d8 100%);
+  }
+
+  .card-icon-wrapper.tertiary {
+    background: linear-gradient(135deg, #a8e6cf 0%, #88e5a3 100%);
+  }
+
+  .card-icon-wrapper.success {
+    background: linear-gradient(135deg, #7fcdcd 0%, #6c7ce0 100%);
+  }
+
+  /* Info Grid */
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 107, 157, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .info-item:hover {
+    background: rgba(255, 107, 157, 0.1);
+    transform: translateX(4px);
+  }
+
+  .info-icon {
+    font-size: 20px;
+    color: var(--ion-color-primary);
+  }
+
+  .info-content {
+    flex: 1;
+  }
+
+  .info-label {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin: 0 0 2px 0;
+  }
+
+  .info-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+
+  /* Settings */
+  .settings-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .settings-item:last-child {
+    border-bottom: none;
+  }
+
+  .setting-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .setting-icon {
+    font-size: 20px;
+    color: var(--ion-color-primary);
+  }
+
+  .setting-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 2px 0;
+  }
+
+  .setting-desc {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+
+  .modern-toggle {
+    --handle-background: white;
+    --handle-background-checked: white;
+    --background: rgba(0, 0, 0, 0.1);
+    --background-checked: linear-gradient(135deg, #ff6b9d 0%, #ff8ba7 100%);
+  }
+
+  /* Actions Grid */
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .action-button {
+    --color: var(--ion-color-dark);
+    --background: rgba(255, 107, 157, 0.05);
+    --background-hover: rgba(255, 107, 157, 0.1);
+    --background-activated: rgba(255, 107, 157, 0.15);
+    --border-radius: 12px;
+    height: 80px;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+
+  .action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .action-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .action-content ion-icon {
+    font-size: 24px;
+    color: var(--ion-color-primary);
+  }
+
+  .action-content span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Feedback */
+  .feedback-desc {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin: 0 0 16px 0;
+  }
+
+  .modern-textarea {
+    --background: rgba(0, 0, 0, 0.02);
+    --color: var(--ion-color-dark);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .modern-textarea:focus-within {
+    --background: rgba(255, 107, 157, 0.05);
+    border-color: var(--ion-color-primary);
+  }
+
+  .modern-button {
+    --background: linear-gradient(135deg, #ff6b9d 0%, #ff8ba7 50%, #ffa8c1 100%);
+    --color: white;
+    --border-radius: 12px;
+    height: 48px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .modern-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+  }
+
+  /* Logout */
+  .logout-button {
+    --background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    --color: white;
+    --border-radius: 12px;
+    height: 48px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  }
+
+  /* Footer */
+  .footer-section {
+    padding: 40px 16px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-content {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .footer-icon {
+    font-size: 24px;
+    color: #ff6b9d;
+    margin-bottom: 8px;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .footer-text {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+  }
+
+  .footer-copyright {
+    font-size: 14px;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* Dark Mode */
+  .dark .modern-card {
+    --background: rgba(40, 40, 40, 0.95);
+    --color: white;
+  }
+
+  .dark .card-header h2 {
+    color: white;
+  }
+
+  .dark .info-value {
+    color: white;
+  }
+
+  .dark .setting-title {
+    color: white;
+  }
+
+  .dark .action-button {
+    --color: white;
+    --background: rgba(255, 255, 255, 0.1);
+  }
+
+  .dark .modern-textarea {
+    --background: rgba(255, 255, 255, 0.05);
+    --color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .info-item {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .dark .info-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 280px;
+    }
+
+    .app-title {
+      font-size: 28px;
+    }
+
+    .main-logo {
+      font-size: 60px;
+    }
+
+    .actions-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-badges {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,401 @@
+:root {
+  --ion-color-primary: #ff6b9d;
+  --ion-color-primary-rgb: 255, 107, 157;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #e05e8a;
+  --ion-color-primary-tint: #ff7aa7;
+
+  --ion-color-secondary: #a8e6cf;
+  --ion-color-tertiary: #ffd93d;
+  --ion-color-success: #4caf50;
+  --ion-color-warning: #ff9800;
+  --ion-color-danger: #f44336;
+}
+
+/* Background Gradient Pink */
+.content-background {
+  background: linear-gradient(135deg,
+    #ff9a9e 0%,
+    #fecfef 20%,
+    #ffd1ff 40%,
+    #fecfef 60%,
+    #ff9a9e 80%,
+    #fad0c4 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  min-height: 100vh;
+  /* Tambahan supaya bagian bawah tidak ketutup */
+  padding-bottom: 80px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Header Rainbow Animation */
+.header-bar {
+  background: linear-gradient(45deg,
+    #ff6b9d, #ff8a65, #ffd54f, #66bb6a, #42a5f5, #ab47bc, #ff6b9d);
+  background-size: 300% 300%;
+  animation: rainbow 4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+}
+
+.header-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes rainbow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.header-bar ion-title {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  from { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+  to { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5); }
+}
+
+/* Hero Banner */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 30px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(255, 107, 157, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: float 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hero-banner h2 {
+  background: linear-gradient(45deg, #ff6b9d, #ab47bc, #42a5f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-banner p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form Card */
+.form-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(255, 107, 157, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 20px 0;
+  overflow: visible; /* penting supaya tombol tidak terpotong */
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Colorful Items */
+.colorful-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  border-radius: 20px;
+  margin: 12px 0;
+  padding: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(255, 107, 157, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.colorful-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.colorful-item:hover::before {
+  left: 100%;
+}
+
+.colorful-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 107, 157, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+  border-color: rgba(255, 107, 157, 0.3);
+}
+
+.colorful-item ion-icon {
+  color: #ff6b9d;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.colorful-item:hover ion-icon {
+  transform: scale(1.2) rotate(5deg);
+  color: #ab47bc;
+}
+
+/* Label Title */
+.label-title {
+  font-weight: bold;
+  font-size: 18px;
+  background: linear-gradient(45deg, #ff6b9d, #ab47bc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.label-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(45deg, #ff6b9d, #ab47bc);
+  border-radius: 2px;
+}
+
+/* Kategori Chips */
+ion-chip {
+  margin: 6px;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+ion-chip:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+ion-chip[color="tertiary"] {
+  --background: linear-gradient(135deg, #ffd93d, #ff9800);
+  --color: white;
+}
+
+ion-chip[color="medium"] {
+  --background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+  --color: #666;
+}
+
+/* Input Styling */
+ion-input {
+  --padding-start: 15px;
+  --padding-end: 15px;
+  font-size: 16px;
+}
+
+/* Save Button */
+.save-button {
+  background: linear-gradient(135deg, #ff6b9d, #ab47bc, #42a5f5);
+  background-size: 200% 200%;
+  animation: gradientButton 3s ease infinite;
+  margin-top: 20px;
+  height: 48px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+  border-radius: 15px;
+  --border-radius: 15px;
+  --color: #fff;
+  z-index: 10; /* penting */
+  position: relative;
+}
+
+@keyframes gradientButton {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.save-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+}
+
+/* Image Preview */
+.image-preview {
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.image-preview img:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* FAB Button */
+ion-fab-button {
+  --background: linear-gradient(135deg, #ff6b9d, #ab47bc);
+  --box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+  --border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+ion-fab-button:hover {
+  transform: scale(1.1) rotate(15deg);
+  --box-shadow: 0 12px 30px rgba(255, 107, 157, 0.6);
+}
+
+/* File Input Styling */
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed rgba(255, 107, 157, 0.3);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+input[type="file"]:hover {
+  border-color: rgba(255, 107, 157, 0.6);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Modal Styling */
+ion-modal {
+  --background: rgba(255, 255, 255, 0.95);
+  --border-radius: 20px;
+  backdrop-filter: blur(20px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 20px;
+    margin: 15px 0;
+  }
+
+  .hero-banner h2 {
+    font-size: 24px;
+  }
+
+  .form-card {
+    margin: 15px 0;
+  }
+}
+
+/* Loading Animation */
+.loading-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Spacer biar tombol tidak ketutup elemen lain di bawah */
+.bottom-spacer {
+  height: 80px;
+}
